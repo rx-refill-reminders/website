@@ -8,7 +8,7 @@ unit "s3_website" {
   path   = "s3-website"
 
   values = {
-    bucket_name = "website"
+    bucket_name_prefix = "website"
 
     custom_domain = {
       zone_id         = local.hosted_zone_id
