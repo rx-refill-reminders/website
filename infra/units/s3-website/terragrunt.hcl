@@ -3,7 +3,7 @@ include "root" {
 }
 
 terraform {
-  source = "git::github.com/rx-refill-reminders/terraform-modules//modules/s3-website?ref=static-website&depth=0"
+  source = "git::github.com/rx-refill-reminders/terraform-modules//modules/s3-website?ref=s3-website%2Fv0&depth=0"
 }
 
 inputs = values
