@@ -1,0 +1,3 @@
+component: site
+path: site
+type: s3-website
