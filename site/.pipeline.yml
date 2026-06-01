@@ -1,0 +1,7 @@
+deployments:
+  -
+    name: dev
+    bucket: website-339284817422-us-east-1-an
+  -
+    name: prd
+    bucket: website-104875668206-us-east-1-an
