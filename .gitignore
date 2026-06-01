@@ -4,3 +4,4 @@
 .terragrunt-cache/
 .terragrunt-stack/
 dist/
+node_modules/

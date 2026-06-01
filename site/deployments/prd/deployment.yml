@@ -1,0 +1,9 @@
+aws-account-id: 104875668206
+assume-role-arn: arn:aws:iam::104875668206:role/terraform
+s3-bucket: website-104875668206-us-east-1-an
+cf-distribution: E1GHH83Z889Z9Y
+
+env:
+  VITE_API_BASE_URL: https://api.wanderertrip.com.com
+  VITE_COGNITO_DOMAIN: auth.wanderertrip.com
+  VITE_COGNITO_CLIENT_ID: 14797hvagujerq7rl0jpro091s
