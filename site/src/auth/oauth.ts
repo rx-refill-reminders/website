@@ -73,7 +73,6 @@ export async function getAuthUrl(
     state,
   });
 
-  // eslint-disable-next-line no-console
   console.log('OAuth configuration:', {
     cognitoDomain,
     clientId,
