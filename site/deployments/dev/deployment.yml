@@ -1,3 +1,8 @@
+aws-account-id: 339284817422
+assume-role-arn: arn:aws:iam::339284817422:role/terraform
+s3-bucket: website-339284817422-us-east-1-an
+cf-distribution: EWT2N8TR5L4A3
+
 env:
   VITE_API_BASE_URL: https://api.dev.wanderertrip.com.com
   VITE_COGNITO_DOMAIN: auth.dev.wanderertrip.com
