@@ -13,7 +13,7 @@ unit "s3_website" {
     custom_domain = {
       hosted_zone_id  = local.hosted_zone_id
       domain_name     = local.domain
-      certificate_arn = "arn:aws:acm:us-east-1:104875668206:certificate/481fc667-153a-4d14-8f9a-951e8a90cb36"
+      certificate_arn = "arn:aws:acm:us-east-1:104875668206:certificate/a5cf760b-9ad3-45eb-b36f-9384e22f1812"
     }
 
     custom_error_responses = [
