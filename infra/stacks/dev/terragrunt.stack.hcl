@@ -12,7 +12,7 @@ unit "s3_website" {
 
     custom_domain = {
       hosted_zone_id  = local.hosted_zone_id
-      domain_name     = "app.${local.domain}"
+      domain_name     = local.domain
       certificate_arn = "arn:aws:acm:us-east-1:339284817422:certificate/3ef26155-8494-4789-bae2-52d8299aa384"
     }
 
