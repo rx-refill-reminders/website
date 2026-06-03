@@ -4,6 +4,6 @@ s3-bucket: website-339284817422-us-east-1-an
 cf-distribution: EWT2N8TR5L4A3
 
 env:
-  VITE_API_BASE_URL: https://api.dev.wanderertrip.com.com
-  VITE_COGNITO_DOMAIN: auth.dev.wanderertrip.com
+  VITE_API_BASE_URL: https://api.dev.rx-refill-reminders.com.com
+  VITE_COGNITO_DOMAIN: auth.dev.rx-refill-reminders.com
   VITE_COGNITO_CLIENT_ID: 7b4mjjeb3tfksiotqdpa8ilnli
