@@ -37,7 +37,7 @@ jobs:
     needs:
       - detect-changes
     if: ${{ contains(needs.detect-changes.outputs.changed-component-types, '"terragrunt-infra"') }}
-    uses: slingshot-pipelines/workflows/.github/workflows/deploy-terragrunt-infra.yml@no-rx-refill-reminders
+    uses: slingshot-pipelines/workflows/.github/workflows/deploy-terragrunt-infra.yml@deploy-terragrunt-infra/v0
     strategy:
       matrix:
         COMPONENT: ${{ fromJSON(needs.detect-changes.outputs.changed-components-by-type).terragrunt-infra }}
@@ -51,7 +51,7 @@ jobs:
     needs:
       - detect-changes
     if: ${{ contains(needs.detect-changes.outputs.changed-component-types, '"s3-website"') }}
-    uses: slingshot-pipelines/workflows/.github/workflows/deploy-s3-website.yml@no-rx-refill-reminders
+    uses: slingshot-pipelines/workflows/.github/workflows/deploy-s3-website.yml@deploy-s3-website/v0
     strategy:
       matrix:
         COMPONENT: ${{ fromJSON(needs.detect-changes.outputs.changed-components-by-type).s3-website }}
