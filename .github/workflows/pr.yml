@@ -35,7 +35,7 @@ jobs:
     needs:
       - detect-changes
     if: ${{ contains(needs.detect-changes.outputs.changed-component-types, '"components"') }}
-    uses: slingshot-pipelines/workflows/.github/workflows/check-components.yml@check-github-workflows/v0
+    uses: slingshot-pipelines/workflows/.github/workflows/check-components.yml@check-components/v0
     secrets: inherit
 
   check-github-workflows:
