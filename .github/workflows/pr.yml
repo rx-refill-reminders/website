@@ -18,6 +18,75 @@ concurrency:
 
 jobs:
 
-  pr:
-    uses: rx-refill-reminders/pipeline/.github/workflows/pr.yml@pr/v0
+  detect-changes:
+    runs-on: ubuntu-latest
+    outputs:
+      changed-component-types: ${{ steps.components-changed.outputs.changed-component-types }}
+      changed-components-by-type: ${{ steps.components-changed.outputs.changed-components-by-type }}
+    steps:
+      -
+        uses: actions/checkout@v6
+      -
+        name: Detect changed components
+        id: components-changed
+        uses: slingshot-pipelines/action-components-changed@v1
+
+  check-components:
+    needs:
+      - detect-changes
+    if: ${{ contains(needs.detect-changes.outputs.changed-component-types, '"components"') }}
+    uses: slingshot-pipelines/workflows/.github/workflows/check-components.yml@no-rx-refill-reminders
     secrets: inherit
+
+  check-github-workflows:
+    needs:
+      - detect-changes
+    if: ${{ contains(needs.detect-changes.outputs.changed-component-types, '"github-workflows"') }}
+    uses: slingshot-pipelines/workflows/.github/workflows/check-github-workflows.yml@no-rx-refill-reminders
+    strategy:
+      matrix:
+        COMPONENT: ${{ fromJSON(needs.detect-changes.outputs.changed-components-by-type).github-workflows }}
+    with:
+      COMPONENT: ${{ matrix.COMPONENT }}
+    secrets: inherit
+
+  check-terragrunt-infra:
+    needs:
+      - detect-changes
+    if: ${{ contains(needs.detect-changes.outputs.changed-component-types, '"terragrunt-infra"') }}
+    uses: slingshot-pipelines/workflows/.github/workflows/check-terragrunt-infra.yml@no-rx-refill-reminders
+    strategy:
+      matrix:
+        COMPONENT: ${{ fromJSON(needs.detect-changes.outputs.changed-components-by-type).terragrunt-infra }}
+    with:
+      COMPONENT: ${{ matrix.COMPONENT }}
+      TERRAFORM_VERSION: ${{ vars.TERRAFORM_VERSION }}
+      TERRAGRUNT_VERSION: ${{ vars.TERRAGRUNT_VERSION }}
+    secrets: inherit
+
+  check-s3-website:
+    needs:
+      - detect-changes
+    if: ${{ contains(needs.detect-changes.outputs.changed-component-types, '"s3-website"') }}
+    uses: slingshot-pipelines/workflows/.github/workflows/check-s3-website.yml@no-rx-refill-reminders
+    strategy:
+      matrix:
+        COMPONENT: ${{ fromJSON(needs.detect-changes.outputs.changed-components-by-type).s3-website }}
+    with:
+      COMPONENT: ${{ matrix.COMPONENT }}
+    secrets: inherit
+
+  pr-ready:
+    runs-on: ubuntu-latest
+    if: ${{ always() }}
+    needs:
+      - detect-changes
+      - check-components
+      - check-github-workflows
+      - check-terragrunt-infra
+      - check-s3-website
+    steps:
+      -
+        uses: slingshot-pipelines/action-pr-ready@v0
+        with:
+          NEEDS: ${{ toJSON(needs) }}
