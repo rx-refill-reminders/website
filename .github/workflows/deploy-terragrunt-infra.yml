@@ -23,6 +23,11 @@ on:
         description: tag
         required: true
         type: string
+      DISPATCH_NEXT:
+        description: dispatch next on success?
+        required: true
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -95,7 +100,7 @@ jobs:
     needs:
       - parse-deployment-info
       - deploy
-    if: ${{ needs.parse-deployment-info.outputs.HAS_NEXT == 'true' }}
+    if: ${{ needs.parse-deployment-info.outputs.HAS_NEXT == 'true' && !(github.event_name == 'wokflow_dispatch' && inputs.DISPATCH_NEXT == false) }}
     runs-on: ubuntu-latest
     steps:
       -
