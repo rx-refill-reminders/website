@@ -1,3 +1,14 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/slingshot-pipelines/jsonschemas/main/schemas/component/v1/component.schema.json
+
 component: site
 path: site
 type: s3-website
+
+deployments:
+  environments:
+    dev: {}
+    prd: {}
+
+  sequence:
+    - environment: dev
+    - environment: prd
