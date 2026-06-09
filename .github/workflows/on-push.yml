@@ -1,5 +1,7 @@
 name: on-push
 
+run-name: ${{ github.event_name == 'workflow_dispatch' && 'Manual release' || github.event.head_commit.message }}
+
 on:
 
   push:
