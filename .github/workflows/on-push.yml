@@ -1,4 +1,4 @@
-name: deploy
+name: tag-and-release
 
 on:
   push:
@@ -33,25 +33,23 @@ jobs:
         id: components-changed
         uses: slingshot-pipelines/action-components-changed@v1
 
-  deploy-terragrunt-infra:
+  terragrunt-infra:
     needs:
       - detect-changes
     if: ${{ contains(needs.detect-changes.outputs.changed-component-types, '"terragrunt-infra"') }}
-    uses: slingshot-pipelines/workflows/.github/workflows/deploy-terragrunt-infra.yml@deploy-terragrunt-infra/v0
+    uses: slingshot-pipelines/workflows/.github/workflows/deploy-sequence-start.yml@deploy-sequence-start/v0
     strategy:
       matrix:
         COMPONENT: ${{ fromJSON(needs.detect-changes.outputs.changed-components-by-type).terragrunt-infra }}
     with:
       COMPONENT: ${{ matrix.COMPONENT }}
-      TERRAFORM_VERSION: ${{ vars.TERRAFORM_VERSION }}
-      TERRAGRUNT_VERSION: ${{ vars.TERRAGRUNT_VERSION }}
     secrets: inherit
 
-  deploy-s3-website:
+  s3-website:
     needs:
       - detect-changes
     if: ${{ contains(needs.detect-changes.outputs.changed-component-types, '"s3-website"') }}
-    uses: slingshot-pipelines/workflows/.github/workflows/deploy-s3-website.yml@deploy-s3-website/v0
+    uses: slingshot-pipelines/workflows/.github/workflows/deploy-sequence-start.yml@deploy-sequence-start/v0
     strategy:
       matrix:
         COMPONENT: ${{ fromJSON(needs.detect-changes.outputs.changed-components-by-type).s3-website }}
