@@ -1,5 +1,7 @@
 name: deploy (s3-website)
 
+run-name: Deploy ${{ github.event.client_payload.tag }} to ${{ github.event.client_payload.environment }}
+
 on:
   repository_dispatch:
     types:
