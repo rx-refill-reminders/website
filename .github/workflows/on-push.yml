@@ -1,4 +1,4 @@
-name: tag-and-release
+name: on-push
 
 on:
 
