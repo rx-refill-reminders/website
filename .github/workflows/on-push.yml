@@ -43,7 +43,7 @@ jobs:
         with:
           all: ${{ github.event_name == 'workflow_dispatch' && inputs.TRIGGER_ALL }}
 
-  terragrunt-infra:
+  release-terragrunt-infra:
     needs:
       - detect-changes
     if: ${{ contains(needs.detect-changes.outputs.changed-component-types, '"terragrunt-infra"') }}
@@ -55,7 +55,7 @@ jobs:
       COMPONENT: ${{ matrix.COMPONENT }}
     secrets: inherit
 
-  s3-website:
+  release-s3-website:
     needs:
       - detect-changes
     if: ${{ contains(needs.detect-changes.outputs.changed-component-types, '"s3-website"') }}
