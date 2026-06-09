@@ -55,7 +55,9 @@ jobs:
         COMPONENT: ${{ fromJSON(needs.detect-changes.outputs.changed-components-by-type).terragrunt-infra }}
     with:
       COMPONENT: ${{ matrix.COMPONENT }}
-    secrets: inherit
+    secrets:
+      WRITER_APP_CLIENT_ID: ${{ secrets.WRITER_APP_CLIENT_ID }}
+      WRITER_APP_PRIVATE_KEY: ${{ secrets.WRITER_APP_PRIVATE_KEY }}
 
   release-s3-website:
     needs:
@@ -67,4 +69,6 @@ jobs:
         COMPONENT: ${{ fromJSON(needs.detect-changes.outputs.changed-components-by-type).s3-website }}
     with:
       COMPONENT: ${{ matrix.COMPONENT }}
-    secrets: inherit
+    secrets:
+      WRITER_APP_CLIENT_ID: ${{ secrets.WRITER_APP_CLIENT_ID }}
+      WRITER_APP_PRIVATE_KEY: ${{ secrets.WRITER_APP_PRIVATE_KEY }}
