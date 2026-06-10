@@ -3,12 +3,3 @@
 path: infra
 component: infra
 type: terragrunt-infra
-
-deployments:
-  environments:
-    dev: {}
-    prd: {}
-
-  sequence:
-    - environment: dev
-    - environment: prd

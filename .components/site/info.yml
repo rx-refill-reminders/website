@@ -3,12 +3,3 @@
 component: site
 path: site
 type: s3-website
-
-deployments:
-  environments:
-    dev: {}
-    prd: {}
-
-  sequence:
-    - environment: dev
-    - environment: prd
